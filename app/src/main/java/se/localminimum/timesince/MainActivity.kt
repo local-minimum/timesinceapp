@@ -3,6 +3,8 @@ package se.localminimum.timesince
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MotionEvent
 import android.view.VelocityTracker
 import android.widget.TextView
@@ -10,9 +12,10 @@ import java.util.*
 import kotlin.math.hypot
 
 const val MAX_DURATION_VALUE = 99
-const val MAX_STAY_TOUCH_SPEED = 3 // px / s
-const val NEW_TIME_SINCE_EVENT_TOUCH_DURATION = 2000 // millis
-
+const val MAX_STAY_TOUCH_SPEED = 5 // px / s
+const val NEW_TIME_SINCE_EVENT_TOUCH_DURATION = 2000f // millis
+const val CHECK_STATUS_FREQUENCY_HIGH = 50L
+const val CHECK_STATUS_FREQUENCY_LOW = 150L
 
 class MainActivity : AppCompatActivity() {
     private var mVelocityTracker: VelocityTracker? = null
@@ -20,6 +23,8 @@ class MainActivity : AppCompatActivity() {
     private var touchStart: Long = 0
 
     private var timeSinceEvent: TimeSinceEvent? = null
+
+    private val mainHandler: Handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +35,18 @@ class MainActivity : AppCompatActivity() {
                 System.currentTimeMillis() - 60000L * 6500L
         )
         this.setTimeSince(event)
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                checkStatus()
+                mainHandler.postDelayed(
+                        this,
+                        when (registerNewTimeSinceEvent) {
+                            true -> CHECK_STATUS_FREQUENCY_HIGH
+                            false -> CHECK_STATUS_FREQUENCY_LOW
+                        }
+                )
+            }
+        })
     }
 
     @SuppressLint("Recycle")
@@ -51,17 +68,11 @@ class MainActivity : AppCompatActivity() {
                         val speed = hypot(getXVelocity(pointerId), getYVelocity(pointerId))
                         registerNewTimeSinceEvent = if (registerNewTimeSinceEvent) speed < MAX_STAY_TOUCH_SPEED else registerNewTimeSinceEvent
                     }
-                    if (registerNewTimeSinceEvent && System.currentTimeMillis() - touchStart > NEW_TIME_SINCE_EVENT_TOUCH_DURATION) {
-                        onNewTimeSinceEvent()
-                    }
-
                 }
                 MotionEvent.ACTION_UP -> {
                     mVelocityTracker?.recycle()
                     mVelocityTracker = null
-                    if (registerNewTimeSinceEvent) {
-                        onNewTimeSinceEvent()
-                    }
+                    registerNewTimeSinceEvent = false
                 }
             }
         }
@@ -73,6 +84,7 @@ class MainActivity : AppCompatActivity() {
         timeSinceEvent?.apply {
             val event = TimeSinceEvent(id, name, System.currentTimeMillis())
             setTimeSince(event)
+            //TODO: Dispatch to db
         }
 
     }
@@ -101,5 +113,31 @@ class MainActivity : AppCompatActivity() {
         }
         durationView.text = durationText
         durationUnitView.text = timeSince.unit
+    }
+
+    private fun getStationaryPressDuration(): Float {
+        return when(registerNewTimeSinceEvent) {
+            false -> 0f
+            true -> (System.currentTimeMillis() - touchStart).toFloat() / NEW_TIME_SINCE_EVENT_TOUCH_DURATION
+        }
+    }
+
+    private fun checkStatus() {
+        val durationView = findViewById<TextView>(R.id.durationText)
+        val durationPlusView = findViewById<TextView>(R.id.durationTextPlus)
+        val stationaryTouch = getStationaryPressDuration()
+
+        if (stationaryTouch > 1) {
+            onNewTimeSinceEvent()
+            durationView.alpha = 1f
+            durationPlusView.alpha = 1f
+        } else if (stationaryTouch > 0) {
+            durationView.alpha = 1 - stationaryTouch
+            durationPlusView.alpha = 1 - stationaryTouch
+        } else {
+            durationView.alpha = 1f
+            durationPlusView.alpha = 1f
+            timeSinceEvent?.let { setTimeSince(it) }
+        }
     }
 }
