@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.MotionEvent
 import android.view.VelocityTracker
+import android.view.View
 import android.widget.TextView
 import java.util.*
+import java.util.concurrent.Callable
 import kotlin.math.hypot
 
 const val MAX_DURATION_VALUE = 99
@@ -17,7 +20,7 @@ const val NEW_TIME_SINCE_EVENT_TOUCH_DURATION = 2000f // millis
 const val CHECK_STATUS_FREQUENCY_HIGH = 50L
 const val CHECK_STATUS_FREQUENCY_LOW = 150L
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()  {
     private var mVelocityTracker: VelocityTracker? = null
     private var registerNewTimeSinceEvent: Boolean = false
     private var touchStart: Long = 0
@@ -29,12 +32,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val event = TimeSinceEvent(
-                UUID.randomUUID(),
-                "Duktighet",
-                System.currentTimeMillis() - 60000L * 6500L
-        )
-        this.setTimeSince(event)
+        findViewById<View>(R.id.btnListTrackers).setOnClickListener { onClickListTrackers() }
+
+        this.setTimeSince(interestingTimeSinceEvent())
+        initLiveMainHandler()
+    }
+
+    private fun onClickListTrackers() {
+        // Log.d("NAV", "list trackers")
+        //TODO: swap views
+    }
+
+    private fun initLiveMainHandler() {
         mainHandler.post(object : Runnable {
             override fun run() {
                 checkStatus()

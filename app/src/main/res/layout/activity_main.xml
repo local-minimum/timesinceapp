@@ -25,22 +25,24 @@
         android:id="@+id/taskFlareLeft"
         android:layout_width="76dp"
         android:layout_height="29dp"
+        android:paddingStart="10dp"
         android:paddingLeft="10dp"
+        android:paddingEnd="0dp"
         android:paddingRight="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/taskName"
         app:layout_constraintEnd_toStartOf="@+id/taskName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/taskName"
         app:srcCompat="@drawable/ic_task_flare"
-        tools:ignore="ContentDescription"
-        android:paddingStart="10dp"
-        android:paddingEnd="0dp" />
+        tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/taskFlareRight"
         android:layout_width="76dp"
         android:layout_height="29dp"
+        android:paddingStart="10dp"
         android:paddingLeft="10dp"
+        android:paddingEnd="0dp"
         android:paddingRight="0dp"
         android:scaleX="-1"
         app:layout_constraintBottom_toBottomOf="@+id/taskName"
@@ -48,9 +50,7 @@
         app:layout_constraintStart_toEndOf="@+id/taskName"
         app:layout_constraintTop_toTopOf="@+id/taskName"
         app:srcCompat="@drawable/ic_task_flare"
-        tools:ignore="ContentDescription"
-        android:paddingStart="10dp"
-        android:paddingEnd="0dp" />
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/durationText"
@@ -98,5 +98,20 @@
         app:layout_constraintStart_toEndOf="@+id/durationText"
         app:layout_constraintTop_toTopOf="@+id/durationText"
         app:layout_constraintVertical_bias="0.13999999" />
+
+    <ImageView
+        android:id="@+id/btnListTrackers"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:clickable="true"
+        android:contentDescription="@string/btn_tracker_list_content_description"
+        android:focusable="true"
+        android:focusableInTouchMode="false"
+        app:layout_constraintBottom_toBottomOf="@+id/durationUnit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/durationUnit"
+        app:srcCompat="@drawable/ic_btn_main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

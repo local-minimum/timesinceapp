@@ -9,4 +9,5 @@
     <string name="time_unit_day">day</string>
     <string name="time_unit_days">days</string>
     <string name="time_since_plus">+</string>
+    <string name="btn_tracker_list_content_description">List of trackers</string>
 </resources>
