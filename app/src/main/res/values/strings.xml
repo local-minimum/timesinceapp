@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Time Since App</string>
+    <string name="task_global">Eventlessness</string>
+    <string name="time_since_default">0</string>
+    <string name="time_unit_minute">minute</string>
+    <string name="time_unit_minutes">minutes</string>
+    <string name="time_unit_hour">hour</string>
+    <string name="time_unit_hours">hours</string>
+    <string name="time_unit_day">day</string>
+    <string name="time_unit_days">days</string>
+    <string name="time_since_plus">+</string>
+</resources>

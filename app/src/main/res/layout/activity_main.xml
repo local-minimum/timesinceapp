@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/taskName"
+        android:layout_width="239dp"
+        android:layout_height="73dp"
+        android:gravity="center"
+        android:text="@string/task_global"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="italic"
+        android:typeface="serif"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.057" />
+
+    <ImageView
+        android:id="@+id/taskFlareLeft"
+        android:layout_width="76dp"
+        android:layout_height="29dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/taskName"
+        app:layout_constraintEnd_toStartOf="@+id/taskName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/taskName"
+        app:srcCompat="@drawable/ic_task_flare"
+        tools:ignore="ContentDescription"
+        android:paddingStart="10dp"
+        android:paddingEnd="0dp" />
+
+    <ImageView
+        android:id="@+id/taskFlareRight"
+        android:layout_width="76dp"
+        android:layout_height="29dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="0dp"
+        android:scaleX="-1"
+        app:layout_constraintBottom_toBottomOf="@+id/taskName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/taskName"
+        app:layout_constraintTop_toTopOf="@+id/taskName"
+        app:srcCompat="@drawable/ic_task_flare"
+        tools:ignore="ContentDescription"
+        android:paddingStart="10dp"
+        android:paddingEnd="0dp" />
+
+    <TextView
+        android:id="@+id/durationText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:text="@string/time_since_default"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textSize="244sp"
+        android:typeface="serif"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskName"
+        app:layout_constraintVertical_bias="0.23000002" />
+
+    <TextView
+        android:id="@+id/durationUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_unit_minutes"
+        android:textSize="22sp"
+        android:typeface="serif"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/durationText"
+        app:layout_constraintVertical_bias="0.93" />
+
+    <TextView
+        android:id="@+id/durationTextPlus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/time_since_plus"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="64sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        app:layout_constraintBottom_toBottomOf="@+id/durationText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/durationText"
+        app:layout_constraintTop_toTopOf="@+id/durationText"
+        app:layout_constraintVertical_bias="0.13999999" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
