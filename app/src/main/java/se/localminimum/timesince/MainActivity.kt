@@ -1,6 +1,7 @@
 package se.localminimum.timesince
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -39,8 +40,10 @@ class MainActivity : AppCompatActivity()  {
     }
 
     private fun onClickListTrackers() {
-        // Log.d("NAV", "list trackers")
-        //TODO: swap views
+        val intent = Intent(this, ListTrackersActivity::class.java).apply {
+            // e.g. putExtra("se.localminimum.timesinze.MESSAGE", message)
+        }
+        startActivity(intent)
     }
 
     private fun initLiveMainHandler() {
