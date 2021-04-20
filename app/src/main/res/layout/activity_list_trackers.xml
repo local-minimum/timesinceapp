@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
     tools:context=".ListTrackersActivity">
 
     <TextView
@@ -12,9 +13,61 @@
         android:layout_height="wrap_content"
         android:text="@string/activity_title_tracker_list"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/trackersScrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/trackersScrollView"
+        android:layout_width="389dp"
+        android:layout_height="613dp"
+        app:layout_constraintBottom_toTopOf="@+id/newTrackerNameInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.79">
+
+        <LinearLayout
+            android:id="@+id/trackersLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
+
+    <EditText
+        android:id="@+id/newTrackerNameInput"
+        android:layout_width="356dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:hint="@string/activity_new_tracker_hint"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:text="@string/task_global"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/btnAddTracker"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:contentDescription="@string/btn_add_tracker"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/newTrackerNameInput"
+        app:layout_constraintTop_toTopOf="@+id/newTrackerNameInput"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/btn_add" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

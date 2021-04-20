@@ -11,4 +11,6 @@
     <string name="time_since_plus">+</string>
     <string name="btn_tracker_list_content_description">List of trackers</string>
     <string name="activity_title_tracker_list">Activities</string>
+    <string name="activity_new_tracker_hint">Name a new tracker</string>
+    <string name="btn_add_tracker">Add new tracker</string>
 </resources>
